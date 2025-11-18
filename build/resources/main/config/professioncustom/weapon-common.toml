@@ -1,0 +1,57 @@
+
+[weapon_general]
+	#武器/装备的最大等级
+	#Range: 1 ~ 1000
+	maxWeaponLevel = 100
+	#1 级升级所需的基础经验值
+	#Range: 1 ~ 100000
+	baseExpRequired = 100
+	#每级升级经验倍率
+	#Range: 1.0 ~ 10.0
+	expMultiplier = 1.5
+	#每级提供的伤害加成，用于 tooltip 显示
+	#Range: 0.0 ~ 100.0
+	damageBonusPerLevel = 0.5
+	#每级提供的护甲加成，用于 tooltip 显示
+	#Range: 0.0 ~ 100.0
+	armorBonusPerLevel = 0.5
+
+# 迁移至数据包修改
+[weapon_attribute_refresh]
+	#普通品质武器/装备升级时新增/强化词条的概率
+	#Range: 0.0 ~ 1.0
+	commonRefreshChance = 0.05
+	#优秀品质武器/装备升级时新增/强化词条的概率
+	#Range: 0.0 ~ 1.0
+	uncommonRefreshChance = 0.08
+	#稀有品质武器/装备升级时新增/强化词条的概率
+	#Range: 0.0 ~ 1.0
+	rareRefreshChance = 0.12
+	#史诗品质武器/装备升级时新增/强化词条的概率
+	#Range: 0.0 ~ 1.0
+	epicRefreshChance = 0.18
+	#传说品质武器/装备升级时新增/强化词条的概率
+	#Range: 0.0 ~ 1.0
+	legendaryRefreshChance = 0.25
+	#神话品质武器/装备升级时新增/强化词条的概率
+	#Range: 0.0 ~ 1.0
+	mythicRefreshChance = 0.35
+	#普通品质武器/装备最多可拥有的词条数量
+	#Range: 0 ~ 10
+	maxAttributesCommon = 2
+	#优秀品质武器/装备最多可拥有的词条数量
+	#Range: 0 ~ 10
+	maxAttributesUncommon = 3
+	#稀有品质武器/装备最多可拥有的词条数量
+	#Range: 0 ~ 10
+	maxAttributesRare = 4
+	#史诗品质武器/装备最多可拥有的词条数量
+	#Range: 0 ~ 10
+	maxAttributesEpic = 6
+	#传说品质武器/装备最多可拥有的词条数量
+	#Range: 0 ~ 10
+	maxAttributesLegendary = 7
+	#神话品质武器/装备最多可拥有的词条数量
+	#Range: 0 ~ 10
+	maxAttributesMythic = 8
+

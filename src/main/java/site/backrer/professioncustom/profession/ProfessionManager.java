@@ -2,21 +2,28 @@ package site.backrer.professioncustom.profession;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.TagParser;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.util.profiling.metrics.MetricCategory;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 import java.util.function.Supplier;
@@ -34,11 +41,11 @@ public class ProfessionManager extends SimpleJsonResourceReloadListener {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final String FOLDER = "professions";
     
-    // 存储所有已加载的职业，键为职业名称
     private static final Map<String, Profession> PROFESSIONS = new HashMap<>();
     
-    // 存储职业等级映射，用于多级职业结构
     private static final Map<String, List<Profession>> PROFESSION_LEVELS = new HashMap<>();
+
+    private static final Map<String, List<StartingGearItem>> PROFESSION_STARTING_GEAR = new HashMap<>();
     
     // 静态实例，用于支持热加载
     private static ProfessionManager INSTANCE;
@@ -65,6 +72,7 @@ public class ProfessionManager extends SimpleJsonResourceReloadListener {
     protected void apply(Map<ResourceLocation, com.google.gson.JsonElement> object, ResourceManager resourceManager, ProfilerFiller profiler) {
         PROFESSIONS.clear();
         PROFESSION_LEVELS.clear();
+        PROFESSION_STARTING_GEAR.clear();
         
         for (Map.Entry<ResourceLocation, com.google.gson.JsonElement> entry : object.entrySet()) {
             String professionName = entry.getKey().getPath();
@@ -87,7 +95,6 @@ public class ProfessionManager extends SimpleJsonResourceReloadListener {
                     }
                 }
                 
-                // 创建职业实例
                 Profession profession = new Profession(
                     data.name,
                     data.displayName,
@@ -103,11 +110,13 @@ public class ProfessionManager extends SimpleJsonResourceReloadListener {
                     data.damageSpeed
                 );
                 
-                // 存储职业
                 PROFESSIONS.put(data.name, profession);
                 
-                // 更新职业等级映射
                 updateProfessionLevels(profession);
+
+                if (data.startingGear != null && !data.startingGear.isEmpty()) {
+                    PROFESSION_STARTING_GEAR.put(data.name, new java.util.ArrayList<>(data.startingGear));
+                }
                 
                 System.out.println("Loaded profession: " + data.name);
                 } else {
@@ -172,6 +181,94 @@ public class ProfessionManager extends SimpleJsonResourceReloadListener {
     public static Profession getProfessionByName(String name) {
         return PROFESSIONS.get(name);
 
+    }
+    
+    public static void clearProfessionAttributes(Player player) {
+        if (player == null) {
+            return;
+        }
+        final UUID HEALTH_MODIFIER_ID = UUID.fromString("12345678-1234-1234-1234-123456789012");
+        final UUID ARMOR_MODIFIER_ID = UUID.fromString("23456789-2345-2345-2345-234567890123");
+        final UUID DAMAGE_MODIFIER_ID = UUID.fromString("34567890-3456-3456-3456-345678901234");
+
+        AttributeInstance maxHealthAttr = player.getAttribute(Attributes.MAX_HEALTH);
+        AttributeInstance armorAttr = player.getAttribute(Attributes.ARMOR);
+        AttributeInstance damageAttr = player.getAttribute(Attributes.ATTACK_DAMAGE);
+
+        if (maxHealthAttr != null) {
+            maxHealthAttr.removeModifier(HEALTH_MODIFIER_ID);
+            player.setHealth(Math.min(player.getHealth(), (float) maxHealthAttr.getValue()));
+        }
+
+        if (armorAttr != null) {
+            armorAttr.removeModifier(ARMOR_MODIFIER_ID);
+        }
+
+        if (damageAttr != null) {
+            damageAttr.removeModifier(DAMAGE_MODIFIER_ID);
+        }
+    }
+    
+    public static void giveStartingGear(String professionName, Player player) {
+        if (player == null || professionName == null || professionName.isEmpty()) {
+            return;
+        }
+        List<StartingGearItem> gearList = PROFESSION_STARTING_GEAR.get(professionName);
+        if (gearList == null || gearList.isEmpty()) {
+            return;
+        }
+        for (StartingGearItem gear : gearList) {
+            if (gear == null || gear.itemId == null || gear.itemId.isEmpty()) {
+                continue;
+            }
+            ResourceLocation itemId = ResourceLocation.tryParse(gear.itemId);
+            if (itemId == null) {
+                continue;
+            }
+            Item item = ForgeRegistries.ITEMS.getValue(itemId);
+            if (item == null) {
+                continue;
+            }
+            int count = gear.count <= 0 ? 1 : gear.count;
+            ItemStack stack = new ItemStack(item, count);
+            if (gear.nbt != null && !gear.nbt.isEmpty()) {
+                try {
+                    CompoundTag tag = TagParser.parseTag(gear.nbt);
+                    stack.setTag(tag);
+                } catch (Exception e) {
+                }
+            }
+            String slotName = gear.slot != null ? gear.slot.toLowerCase(Locale.ROOT) : "";
+            boolean equipped = false;
+            if (!slotName.isEmpty()) {
+                EquipmentSlot slot = null;
+                if ("head".equals(slotName) || "helmet".equals(slotName)) {
+                    slot = EquipmentSlot.HEAD;
+                } else if ("chest".equals(slotName) || "chestplate".equals(slotName)) {
+                    slot = EquipmentSlot.CHEST;
+                } else if ("legs".equals(slotName) || "leggings".equals(slotName)) {
+                    slot = EquipmentSlot.LEGS;
+                } else if ("feet".equals(slotName) || "boots".equals(slotName)) {
+                    slot = EquipmentSlot.FEET;
+                } else if ("mainhand".equals(slotName) || "main_hand".equals(slotName)) {
+                    slot = EquipmentSlot.MAINHAND;
+                } else if ("offhand".equals(slotName) || "off_hand".equals(slotName)) {
+                    slot = EquipmentSlot.OFFHAND;
+                }
+                if (slot != null) {
+                    ItemStack existing = player.getItemBySlot(slot);
+                    if (existing.isEmpty()) {
+                        player.setItemSlot(slot, stack);
+                        equipped = true;
+                    }
+                }
+            }
+            if (!equipped) {
+                if (!player.addItem(stack)) {
+                    player.drop(stack, false);
+                }
+            }
+        }
     }
      /**
       * 根据玩家职业设置属性修改器
@@ -381,5 +478,13 @@ public class ProfessionManager extends SimpleJsonResourceReloadListener {
         double armor;
         double damage;
         double damageSpeed;
+        List<StartingGearItem> startingGear;
+    }
+
+    private static class StartingGearItem {
+        String itemId;
+        int count;
+        String slot;
+        String nbt;
     }
 }

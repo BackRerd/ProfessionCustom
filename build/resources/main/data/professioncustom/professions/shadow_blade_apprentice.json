@@ -10,5 +10,17 @@
   "health": 18,
   "armor": 0.2,
   "damage": 1.4,
-  "damageSpeed": 1
+  "damageSpeed": 1,
+  "startingGear": [
+    {
+      "itemId": "minecraft:stone_sword",
+      "count": 1,
+      "slot": "mainhand"
+    },
+    {
+      "itemId": "minecraft:leather_boots",
+      "count": 1,
+      "slot": "feet"
+    }
+  ]
 }

@@ -18,7 +18,7 @@
 | `/profession` | 管理员 | 列出或查看职业配置信息（读取数据，不修改任何状态） |
 | `/professioncustom reload ...` | 管理员 | 手动重新加载职业和物品职业的配置文件（数据包） |
 | `/reloaditemprofessions` | 管理员 | 单独重新加载“物品职业配置” |
-| `/professiontest ...` | 任意玩家 | 职业系统测试指令：设置职业、添加职业经验、范围加经验、查看自身职业信息 |
+| `/professiontest ...` | 任意玩家 | 职业系统测试指令：设置职业（含初始装备）、添加职业经验、范围加经验、重置职业、查看自身职业信息 |
 | `/weaponedit ...` | 管理员 | 编辑当前手中武器 / 护甲：等级、经验、品质以及词条数量与数值 |
 
 ---
@@ -119,28 +119,36 @@
 
 根结构：
 
-- `/professiontest set <职业名称>` —— 直接设置玩家当前职业。
-- `/professiontest addxp <数值>` —— 给自己当前职业添加经验.
+- `/professiontest set <职业名称> [玩家]` —— 设置指定玩家（默认自己）的职业（首次会发放该职业配置的初始装备）。
+- `/professiontest addxp <数值> [玩家]` —— 给指定玩家（默认自己）当前职业添加经验.
 - `/professiontest addxpradius <数值> <半径>` —— 给指定半径内所有玩家添加职业经验.
 - `/professiontest info` —— 查看自身职业信息.
+- `/professiontest reset [玩家]` —— 将指定玩家（默认自己）职业重置为“无职业”状态.
 - `/professiontest`（不带子命令）—— 显示帮助文本.
 
-### 1. `/professiontest set <职业名称>`
+### 1. `/professiontest set <职业名称> [玩家]`
 
 - **指令**：
-  - `/professiontest set <professionName>`
+  - `/professiontest set <professionName> [player]`
 - **参数**：
   - `<professionName>`：职业 ID，支持命令自动补全（会列出所有可用职业）。
+  - `[player]`（可选）：目标玩家，不写时默认是执行该指令的玩家自己。
 - **功能**：
-  - 直接修改执行者的职业为指定 ID，并将等级设为 1。
-  - 不做任何前置条件检查，非常适合调试职业搭配时快速切换职业.
+  - 使用与正式职业系统相同的逻辑设置职业：
+    - 若玩家**之前没有任何职业**，则视为首次选择职业：
+      - 设置职业为指定 ID，等级设为 1；
+      - 应用职业属性加成；
+      - 按职业 JSON 中的 `startingGear` 字段发放初始装备（武器 / 护甲 / 道具等）。
+    - 若玩家**已经有职业**，则只切换职业与属性，不会再次发放初始装备（避免刷装备）。
+  - 不做额外前置条件检查，非常适合调试职业搭配时快速切换职业。
 
-### 2. `/professiontest addxp <数值>`
+### 2. `/professiontest addxp <数值> [玩家]`
 
 - **指令**：
-  - `/professiontest addxp <amount>`
+  - `/professiontest addxp <amount> [player]`
 - **参数**：
   - `<amount>`：要增加的职业经验值（整数，≥1）。
+  - `[player]`（可选）：目标玩家，不写时默认是执行该指令的玩家自己。
 - **功能**：
   - 为执行者当前职业添加指定经验值.
   - 若当前未选择职业，会提示“您还没有选择职业！”.
@@ -167,7 +175,22 @@
   - 查看执行者当前职业的信息：职业名、等级、经验、升级进度.
   - 若尚未选择职业，则提示“您还没有选择职业！”.
 
-### 5. `/professiontest`（无子命令）
+### 5. `/professiontest reset [玩家]`
+
+- **指令**：
+  - `/professiontest reset [player]`
+- **参数**：
+  - `[player]`（可选）：目标玩家，不写时默认是执行该指令的玩家自己。
+- **功能**：
+  - 将目标玩家当前职业**重置为“无职业”状态**：
+    - 清空 `professionName`，重置等级与经验为默认值；
+    - 移除该职业带来的属性加成（生命、护甲、攻击力等的职业修改器）。
+  - 若当前尚未拥有职业，会提示“您当前没有职业，无需重置。”。
+  - 常用于测试：
+    - 先 `reset` 清空职业；
+    - 再用 `/professiontest set <职业名称>` 模拟玩家第一次选职业，顺便验证初始装备配置是否正确。
+
+### 6. `/professiontest`（无子命令）
 
 - **指令**：
   - `/professiontest`

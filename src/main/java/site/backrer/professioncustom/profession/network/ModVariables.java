@@ -228,6 +228,15 @@ public class ModVariables {
             ProfessionManager.setAttributeByProfessionInPlayer(professionName, player);
         }
         
+        public void clearProfession(Player player) {
+            this.professionName = "";
+            this.professionLevel = 1;
+            this.currentExperience = 0;
+            this.maxExperience = 100;
+            syncPlayerVariables(player);
+            ProfessionManager.clearProfessionAttributes(player);
+        }
+        
         /**
          * 玩家升级处理
          * @param player 玩家实体，用于发送升级消息

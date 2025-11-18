@@ -80,17 +80,19 @@ public class ProfessionHelper {
             return false;
         }
         
-        // 验证职业是否存在
         Profession profession = ProfessionManager.getProfessionByName(professionName);
         if (profession == null) {
             return false;
         }
         
-        // 获取玩家变量并设置职业
         ModVariables.PlayerVariables playerVariables = player.getCapability(ModVariables.PLAYER_VARIABLES_CAPABILITY, null)
                 .orElse(new ModVariables.PlayerVariables());
         
+        boolean hadProfession = playerVariables.hasProfession();
         playerVariables.setProfession(professionName, player);
+        if (!hadProfession) {
+            ProfessionManager.giveStartingGear(professionName, player);
+        }
         return true;
     }
     

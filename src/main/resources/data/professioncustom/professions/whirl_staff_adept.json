@@ -10,5 +10,17 @@
   "health": 20,
   "armor": 0.3,
   "damage": 1.1,
-  "damageSpeed": 1
+  "damageSpeed": 1,
+  "startingGear": [
+    {
+      "itemId": "minecraft:stick",
+      "count": 1,
+      "slot": "mainhand"
+    },
+    {
+      "itemId": "minecraft:leather_chestplate",
+      "count": 1,
+      "slot": "chest"
+    }
+  ]
 }

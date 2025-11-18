@@ -68,7 +68,7 @@ public class ProfessionConfig {
         
         ENABLE_PROFESSION_RESTRICTION = BUILDER
                 .comment("是否启用职业限制（不同职业使用不同武器/装备）")
-                .define("enableProfessionRestriction", false);
+                .define("enableProfessionRestriction", true);
         
         ENABLE_CLASS_LEVELING = BUILDER
                 .comment("是否启用职业等级系统")
@@ -99,19 +99,19 @@ public class ProfessionConfig {
         BUILDER.push("attribute_formulas");
         
         HEALTH_COEFFICIENT = BUILDER
-                .comment("生命值计算公式系数（等级 * 职业生命值 * 系数）")
+                .comment("生命值计算公式系数（等级 * 职业生命值 * 系数） (已删除此配置)")
                 .defineInRange("healthCoefficient", 0.2, 0.01, 1.0);
         
         ARMOR_COEFFICIENT = BUILDER
-                .comment("护甲值计算公式系数（等级 * 职业护甲 * 系数）")
+                .comment("护甲值计算公式系数（等级 * 职业护甲 * 系数） (已删除此配置)")
                 .defineInRange("armorCoefficient", 0.2, 0.01, 1.0);
         
         DAMAGE_COEFFICIENT = BUILDER
-                .comment("攻击力计算公式系数（等级 * 职业攻击力 * 系数）")
+                .comment("攻击力计算公式系数（等级 * 职业攻击力 * 系数） (已删除此配置)")
                 .defineInRange("damageCoefficient", 0.2, 0.01, 1.0);
         
         DAMAGE_SPEED_COEFFICIENT = BUILDER
-                .comment("攻击速度计算公式系数（等级 * 职业攻击速度 * 系数）")
+                .comment("攻击速度计算公式系数（等级 * 职业攻击速度 * 系数） (已删除此配置)")
                 .defineInRange("damageSpeedCoefficient", 0.05, 0.01, 0.5);
         
         BUILDER.pop();
@@ -119,11 +119,11 @@ public class ProfessionConfig {
         BUILDER.push("experience");
         
         BASE_EXP_FOR_KILL = BUILDER
-                .comment("击杀怪物获得的基础经验值")
+                .comment("击杀怪物获得的基础经验值 (已删除此配置)")
                 .defineInRange("baseExpForKill", 10, 0, 1000);
         
         EXP_MULTIPLIER_PER_LEVEL = BUILDER
-                .comment("每升一级所需经验的倍率")
+                .comment("每升一级所需经验的倍率 (已删除此配置)")
                 .defineInRange("expMultiplierPerLevel", 1.5, 1.0, 5.0);
         
         BUILDER.pop();
@@ -144,26 +144,26 @@ public class ProfessionConfig {
         
         SHOW_LEVEL_NAME_TAG = BUILDER
                 .comment("是否显示生物等级名称标签（作为前缀添加到生物名称中）")
-                .define("showLevelNameTag", true);
+                .define("showLevelNameTag", false);
         
         SHOW_EXTRA_LEVEL_TAG = BUILDER
                 .comment("是否显示额外的等级标签（在生物头顶额外渲染）")
-                .define("showExtraLevelTag", false);
+                .define("showExtraLevelTag", true);
         
         HEALTH_BONUS_PER_LEVEL = BUILDER
-                .comment("每级额外增加的基础生命值百分比")
+                .comment("每级额外增加的基础生命值百分比 (已删除此配置，迁移至数据包配置)")
                 .defineInRange("healthBonusPerLevel", 0.1, 0.0, 2.0);
         
         ARMOR_BONUS_PER_LEVEL = BUILDER
-                .comment("每级额外增加的护甲值")
+                .comment("每级额外增加的护甲值 (已删除此配置，迁移至数据包配置)")
                 .defineInRange("armorBonusPerLevel", 0.5, 0.0, 10.0);
         
         ARMOR_TOUGHNESS_BONUS_PER_LEVEL = BUILDER
-                .comment("每级额外增加的护甲韧性")
+                .comment("每级额外增加的护甲韧性 (已删除此配置，迁移至数据包配置)")
                 .defineInRange("armorToughnessBonusPerLevel", 0.1, 0.0, 5.0);
         
         ATTACK_DAMAGE_BONUS_PER_LEVEL = BUILDER
-                .comment("每级额外增加的基础攻击力百分比")
+                .comment("每级额外增加的基础攻击力百分比 (已删除此配置，迁移至数据包配置)")
                 .defineInRange("attackDamageBonusPerLevel", 0.05, 0.0, 2.0);
         EXCLUDED_MOBS = BUILDER
                 .defineList("excludedMobs", Collections.emptyList(), o -> o instanceof String);
@@ -173,11 +173,11 @@ public class ProfessionConfig {
         BUILDER.push("profession_change");
         
         ALLOW_PROFESSION_CHANGE = BUILDER
-                .comment("是否允许玩家切换职业")
+                .comment("是否允许玩家切换职业 (未实现)")
                 .define("allowProfessionChange", true);
         
         PROFESSION_CHANGE_COST = BUILDER
-                .comment("切换职业的代价（如经验值或金币）")
+                .comment("切换职业的代价（如经验值或金币） (未实现)")
                 .defineInRange("professionChangeCost", 100, 0, 10000);
         
         BUILDER.pop();

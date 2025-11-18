@@ -10,5 +10,22 @@
   "health": 24,
   "armor": 1.2,
   "damage": 0.8,
-  "damageSpeed": 1
+  "damageSpeed": 1,
+  "startingGear": [
+    {
+      "itemId": "minecraft:iron_sword",
+      "count": 1,
+      "slot": "mainhand"
+    },
+    {
+      "itemId": "minecraft:shield",
+      "count": 1,
+      "slot": "offhand"
+    },
+    {
+      "itemId": "minecraft:iron_helmet",
+      "count": 1,
+      "slot": "head"
+    }
+  ]
 }

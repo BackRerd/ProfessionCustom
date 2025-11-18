@@ -473,6 +473,91 @@
 
 你可以通过修改职业 JSON 调整职业之间的相对强度，再通过 toml 系数整体放大或压缩整个职业系统的强度。
 
+### 7.5 职业初始装备：`startingGear`
+
+从当前版本开始，每个职业可以在对应的 `professions/*.json` 中配置一套**初始装备**：
+
+- 仅在**玩家第一次获得职业**时触发（之前没有任何职业 → 第一次选择职业）。
+- 触发时会按配置为玩家：
+  - 尝试自动穿戴到指定装备槽；
+  - 若槽位已被占用，则放入背包；
+  - 背包也满时，掉落到玩家脚下。
+
+#### 7.5.1 字段结构
+
+`startingGear` 与其他字段同级，是一个数组，每个元素代表一件要发放的物品：
+
+```jsonc
+{
+  "name": "berserker",
+  "displayName": "狂战士",
+  "isNormal": false,
+  "upperProfession": "warrior",
+  "professionLevel": 2,
+  "maxLevel": 15,
+  "maxExp": 200,
+  "multiplier": 3,
+  "health": 30,
+  "armor": 3,
+  "damage": 6,
+  "damageSpeed": 1,
+  "startingGear": [
+    {
+      "itemId": "minecraft:iron_sword",
+      "count": 1,
+      "slot": "mainhand"
+    },
+    {
+      "itemId": "minecraft:iron_chestplate",
+      "count": 1,
+      "slot": "chest"
+    }
+  ]
+}
+```
+
+每个 `startingGear` 元素支持字段：
+
+- **`itemId`**（必填）  
+  要发放的物品 ID，格式为 `"modid:item_name"`，例如：
+  - `"minecraft:iron_sword"`
+  - `"professioncustom:my_custom_sword"`
+
+- **`count`**（可选）  
+  发放数量，默认为 `1`。
+
+- **`slot`**（可选）  
+  尝试自动穿戴/放入的槽位字符串，不区分大小写，支持：
+  - `"head"` / `"helmet"`
+  - `"chest"` / `"chestplate"`
+  - `"legs"` / `"leggings"`
+  - `"feet"` / `"boots"`
+  - `"mainhand"` / `"main_hand"`
+  - `"offhand"` / `"off_hand"`
+
+  行为说明：
+  - 若指定了 `slot`，并且对应装备槽当前为空，则**直接穿上/放入该槽位**；
+  - 若该槽位已有物品，或未填写 `slot`，则尝试放入背包；
+  - 背包也无法放入时，物品会掉落到玩家脚下（避免被吞）。
+
+  > 如果你**只想往背包里添加物品**（例如给几组食物、材料），就不要写 `slot` 字段，该物品会直接按普通物品塞进背包，不会尝试自动装备。
+
+- **`nbt`**（可选）  
+  物品的 NBT 字符串，使用标准 NBT 文本形式，例如：
+
+  ```jsonc
+  {
+    "itemId": "minecraft:iron_sword",
+    "count": 1,
+    "slot": "mainhand",
+    "nbt": "{Enchantments:[{id:\"minecraft:sharpness\",lvl:3s}]}"
+  }
+  ```
+
+  - 若 NBT 解析失败，游戏会忽略该 NBT，但不会导致崩溃。
+
+> 小结：通过 `startingGear`，你可以为每个职业定制一套“新手套装”（武器、护甲、道具等），在玩家第一次选择该职业时一次性发放。
+
 ---
 
 ## 8. 生物与世界倍率配置：`professioncustom/example_config.json`

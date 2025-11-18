@@ -10,5 +10,17 @@
   "health": 30,
   "armor": 3,
   "damage": 6,
-  "damageSpeed": 1
+  "damageSpeed": 1,
+  "startingGear": [
+    {
+      "itemId": "minecraft:iron_sword",
+      "count": 1,
+      "slot": "mainhand"
+    },
+    {
+      "itemId": "minecraft:iron_chestplate",
+      "count": 1,
+      "slot": "chest"
+    }
+  ]
 }

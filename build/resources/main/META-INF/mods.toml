@@ -17,7 +17,7 @@ license = "All Rights Reserved"
 # The modid of the mod
 modId = "professioncustom" #mandatory
 # The version number of the mod
-version = "1.0-SNAPSHOT" #mandatory
+version = "0.0.1" #mandatory
 # A display name for the mod
 displayName = "ProfessionCustom" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification https://docs.minecraftforge.net/en/latest/misc/updatechecker/
@@ -25,11 +25,11 @@ displayName = "ProfessionCustom" #mandatory
 # A URL for the "homepage" for this mod, displayed in the mod UI
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-#logoFile="professioncustom.png" #optional
+logoFile="professioncustom.png" #optional
 # A text field displayed in the mod UI
 #credits="Thanks for this example mod goes to Java" #optional
 # A text field displayed in the mod UI
-authors = "" #optional
+authors = "JoBackRer" #optional
 # Display Test controls the display for your mod in the server connection screen
 # MATCH_VERSION means that your mod will cause a red X if the versions on client and server differ. This is the default behaviour and should be what you choose if you have server and client elements to your mod.
 # IGNORE_SERVER_VERSION means that your mod will not cause a red X if it's present on the server but not on the client. This is what you should use if you're a server only mod.
@@ -39,7 +39,7 @@ authors = "" #optional
 #displayTest="MATCH_VERSION" # MATCH_VERSION is the default if nothing is specified (#optional)
 
 # The description text for the mod (multi line!) (#mandatory)
-description = ''''''
+description = '''"ProfessionCustom It is a combat and character development mod featuring three major systems: player professions, monster levels and tags, as well as weapon and armor progression. It also supports highly customizable difficulty and gameplay through data packs."'''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies."professioncustom"]] #optional
 # the modid of the dependency

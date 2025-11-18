@@ -22,24 +22,24 @@
 	maxDamageSpeed = 3.8
 
 [attribute_formulas]
-	#生命值计算公式系数（等级 * 职业生命值 * 系数）
+	#生命值计算公式系数（等级 * 职业生命值 * 系数） (已删除此配置)
 	#Range: 0.01 ~ 1.0
 	healthCoefficient = 0.2
-	#护甲值计算公式系数（等级 * 职业护甲 * 系数）
+	#护甲值计算公式系数（等级 * 职业护甲 * 系数） (已删除此配置)
 	#Range: 0.01 ~ 1.0
 	armorCoefficient = 0.2
-	#攻击力计算公式系数（等级 * 职业攻击力 * 系数）
+	#攻击力计算公式系数（等级 * 职业攻击力 * 系数） (已删除此配置)
 	#Range: 0.01 ~ 1.0
 	damageCoefficient = 0.2
-	#攻击速度计算公式系数（等级 * 职业攻击速度 * 系数）
+	#攻击速度计算公式系数（等级 * 职业攻击速度 * 系数） (已删除此配置)
 	#Range: 0.01 ~ 0.5
 	damageSpeedCoefficient = 0.05
 
 [experience]
-	#击杀怪物获得的基础经验值
+	#击杀怪物获得的基础经验值 (已删除此配置)
 	#Range: 0 ~ 1000
 	baseExpForKill = 10
-	#每升一级所需经验的倍率
+	#每升一级所需经验的倍率 (已删除此配置)
 	#Range: 1.0 ~ 5.0
 	expMultiplierPerLevel = 1.5
 
@@ -56,24 +56,24 @@
 	showLevelNameTag = false
 	#是否显示额外的等级标签（在生物头顶额外渲染）
 	showExtraLevelTag = true
-	#每级额外增加的基础生命值百分比
+	#每级额外增加的基础生命值百分比 (已删除此配置，迁移至数据包配置)
 	#Range: 0.0 ~ 2.0
 	healthBonusPerLevel = 0.1
-	#每级额外增加的护甲值
+	#每级额外增加的护甲值 (已删除此配置，迁移至数据包配置)
 	#Range: 0.0 ~ 10.0
 	armorBonusPerLevel = 0.5
-	#每级额外增加的护甲韧性
+	#每级额外增加的护甲韧性 (已删除此配置，迁移至数据包配置)
 	#Range: 0.0 ~ 5.0
 	armorToughnessBonusPerLevel = 0.1
-	#每级额外增加的基础攻击力百分比
+	#每级额外增加的基础攻击力百分比 (已删除此配置，迁移至数据包配置)
 	#Range: 0.0 ~ 2.0
 	attackDamageBonusPerLevel = 0.05
 	excludedMobs = []
 
 [profession_change]
-	#是否允许玩家切换职业
+	#是否允许玩家切换职业 (未实现)
 	allowProfessionChange = true
-	#切换职业的代价（如经验值或金币）
+	#切换职业的代价（如经验值或金币） (未实现)
 	#Range: 0 ~ 10000
 	professionChangeCost = 100
 

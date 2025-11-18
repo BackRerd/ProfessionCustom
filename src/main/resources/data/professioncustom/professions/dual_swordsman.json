@@ -10,5 +10,22 @@
   "health": 20,
   "armor": 0.4,
   "damage": 1.1,
-  "damageSpeed": 1
+  "damageSpeed": 1,
+  "startingGear": [
+    {
+      "itemId": "minecraft:stone_sword",
+      "count": 1,
+      "slot": "mainhand"
+    },
+    {
+      "itemId": "minecraft:stone_sword",
+      "count": 1,
+      "slot": "offhand"
+    },
+    {
+      "itemId": "minecraft:leather_chestplate",
+      "count": 1,
+      "slot": "chest"
+    }
+  ]
 }

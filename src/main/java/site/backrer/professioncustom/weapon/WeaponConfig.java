@@ -65,52 +65,52 @@ public class WeaponConfig {
         BUILDER.push("weapon_attribute_refresh");
 
         ATTRIBUTE_REFRESH_CHANCE_COMMON = BUILDER
-                .comment("普通品质武器/装备升级时新增/强化词条的概率")
+                .comment("普通品质武器/装备升级时新增/强化词条的概率 （迁移至数据包配置）")
                 .defineInRange("commonRefreshChance", 0.05, 0.0, 1.0);
 
         ATTRIBUTE_REFRESH_CHANCE_UNCOMMON = BUILDER
-                .comment("优秀品质武器/装备升级时新增/强化词条的概率")
+                .comment("优秀品质武器/装备升级时新增/强化词条的概率（迁移至数据包配置）")
                 .defineInRange("uncommonRefreshChance", 0.08, 0.0, 1.0);
 
         ATTRIBUTE_REFRESH_CHANCE_RARE = BUILDER
-                .comment("稀有品质武器/装备升级时新增/强化词条的概率")
+                .comment("稀有品质武器/装备升级时新增/强化词条的概率（迁移至数据包配置）")
                 .defineInRange("rareRefreshChance", 0.12, 0.0, 1.0);
 
         ATTRIBUTE_REFRESH_CHANCE_EPIC = BUILDER
-                .comment("史诗品质武器/装备升级时新增/强化词条的概率")
+                .comment("史诗品质武器/装备升级时新增/强化词条的概率（迁移至数据包配置）")
                 .defineInRange("epicRefreshChance", 0.18, 0.0, 1.0);
 
         ATTRIBUTE_REFRESH_CHANCE_LEGENDARY = BUILDER
-                .comment("传说品质武器/装备升级时新增/强化词条的概率")
+                .comment("传说品质武器/装备升级时新增/强化词条的概率（迁移至数据包配置）")
                 .defineInRange("legendaryRefreshChance", 0.25, 0.0, 1.0);
 
         ATTRIBUTE_REFRESH_CHANCE_MYTHIC = BUILDER
-                .comment("神话品质武器/装备升级时新增/强化词条的概率")
+                .comment("神话品质武器/装备升级时新增/强化词条的概率（迁移至数据包配置）")
                 .defineInRange("mythicRefreshChance", 0.35, 0.0, 1.0);
 
         // 不同品质最大词条数量
         MAX_ATTRIBUTES_COMMON = BUILDER
-                .comment("普通品质武器/装备最多可拥有的词条数量")
+                .comment("普通品质武器/装备最多可拥有的词条数量（迁移至数据包配置）")
                 .defineInRange("maxAttributesCommon", 2, 0, 10);
 
         MAX_ATTRIBUTES_UNCOMMON = BUILDER
-                .comment("优秀品质武器/装备最多可拥有的词条数量")
+                .comment("优秀品质武器/装备最多可拥有的词条数量（迁移至数据包配置）")
                 .defineInRange("maxAttributesUncommon", 3, 0, 10);
 
         MAX_ATTRIBUTES_RARE = BUILDER
-                .comment("稀有品质武器/装备最多可拥有的词条数量")
+                .comment("稀有品质武器/装备最多可拥有的词条数量（迁移至数据包配置）")
                 .defineInRange("maxAttributesRare", 4, 0, 10);
 
         MAX_ATTRIBUTES_EPIC = BUILDER
-                .comment("史诗品质武器/装备最多可拥有的词条数量")
+                .comment("史诗品质武器/装备最多可拥有的词条数量（迁移至数据包配置）")
                 .defineInRange("maxAttributesEpic", 6, 0, 10);
 
         MAX_ATTRIBUTES_LEGENDARY = BUILDER
-                .comment("传说品质武器/装备最多可拥有的词条数量")
+                .comment("传说品质武器/装备最多可拥有的词条数量（迁移至数据包配置）")
                 .defineInRange("maxAttributesLegendary", 7, 0, 10);
 
         MAX_ATTRIBUTES_MYTHIC = BUILDER
-                .comment("神话品质武器/装备最多可拥有的词条数量")
+                .comment("神话品质武器/装备最多可拥有的词条数量（迁移至数据包配置）")
                 .defineInRange("maxAttributesMythic", 8, 0, 10);
 
         BUILDER.pop();

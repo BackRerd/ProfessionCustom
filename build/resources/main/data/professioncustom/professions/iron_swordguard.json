@@ -10,5 +10,22 @@
   "health": 22,
   "armor": 0.2,
   "damage": 1,
-  "damageSpeed": 1
+  "damageSpeed": 1,
+  "startingGear": [
+    {
+      "itemId": "minecraft:iron_sword",
+      "count": 1,
+      "slot": "mainhand"
+    },
+    {
+      "itemId": "minecraft:shield",
+      "count": 1,
+      "slot": "offhand"
+    },
+    {
+      "itemId": "minecraft:chainmail_chestplate",
+      "count": 1,
+      "slot": "chest"
+    }
+  ]
 }
