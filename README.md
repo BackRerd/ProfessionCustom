@@ -1,97 +1,141 @@
-# ProfessionCustom - 数据包配置指南
+# ProfessionCustom 模组总说明（Forge 1.20.1）
 
-本模组支持通过数据包来配置生物等级系统的参数，这样玩家和服务器管理员可以自定义游戏体验，而无需修改模组代码或重新编译。
+ProfessionCustom 是一个围绕 **职业系统 / 生物等级与标签 / 武器与护甲成长词条** 展开的综合 RPG 强化模组，适用于 Forge 1.20.1。
 
-## 数据包配置结构
+本 README 作为 **整个项目的总说明文档**，帮助你快速了解：
 
-要创建数据包配置，您需要按照以下目录结构组织JSON文件：
+- 模组提供了哪些核心玩法与系统；
+- 如何简单安装与上手；
+- 各类详细教程文档分别在什么位置。
 
-```
-/data_pack_name/data/professioncustom/professioncustom/your_config.json
-```
+---
 
-## JSON配置格式
+## 一、核心玩法概览
 
-### 配置文件基本结构
+### 1. 玩家职业系统
 
-配置文件必须包含以下两个可选部分：
+- 为玩家提供 **职业 / 进阶职业** 的成长路线。
+- 不同职业拥有不同的属性加成（生命、护甲、攻击力、攻速等）。
+- 职业支持等级与经验成长，可通过玩法或测试指令进行调试。
+- 相关详细说明可参考：
+  - 职业配置与数值：请查看数据包与配置文档 `CONFIG_DATAPACK.md`。
+  - 职业测试与查看指令：`MOD_COMMANDS_GUIDE.md` 中的 `/profession`、`/professiontest` 部分。
 
-```json
-{
-  "dimension_bonuses": {
-    "维度ID": 等级加成倍数
-  },
-  "mob_bonuses": {
-    "生物类型ID": {
-      "health_multiplier": 生命值倍数,
-      "armor_multiplier": 护甲倍数,
-      "armor_toughness_multiplier": 护甲韧性倍数,
-      "attack_damage_multiplier": 攻击力倍数
-    }
-  }
-}
-```
+### 2. 生物等级与标签系统
 
-### 配置说明
+- 非玩家生物会被赋予 **等级** 与 **随机 1–2 个“生物标签”**。
+- 标签拥有 **1–5 级强度**，提供各种战斗特性，例如：
+  - 自爆、复活、吸血、范围伤害、召唤小弟；
+  - 冰冻光环、灵魂免疫、瞬移、天神惩罚等。
+- 标签的出现概率和强度可以通过数据包自定义。
+- 详细效果与标签列表请查看：
+  - `MOD_TUTORIAL_TAGS.md` —— 生物标签 / 武器词条 / 装备词条完整教学文档。
 
-1. **dimension_bonuses**：定义不同维度的等级加成倍数
-   - 键：维度的资源位置（如 `minecraft:overworld`）
-   - 值：浮点数，表示该维度中生物等级的额外加成倍数
+### 3. 武器与护甲成长与词条
 
-2. **mob_bonuses**：定义特定生物类型的属性加成
-   - 键：生物类型的资源位置（如 `minecraft:zombie`）
-   - 值：包含以下属性的对象：
-     - `health_multiplier`：生命值提升倍数
-     - `armor_multiplier`：护甲值提升倍数
-     - `armor_toughness_multiplier`：护甲韧性提升倍数
-     - `attack_damage_multiplier`：攻击力提升倍数
+- 武器与护甲拥有：
+  - **等级与经验**：战斗中获取经验，升级提升基础能力；
+  - **品质**：例如 common / rare / epic / legendary / mythic 等；
+  - **随机属性词条**：如攻击力、暴击率、火焰伤害、吸血、定伤、反伤、闪避等。
+- 通过指令可快速编辑、测试：
+  - `/weaponedit setlevel / setexp / addexp / setquality ...`；
+  - `/weaponedit setattr / delattr` 等。
+- 这些词条与成长规则的详细说明见：
+  - `MOD_TUTORIAL_TAGS.md` —— 武器/装备词条说明；
+  - `MOD_COMMANDS_GUIDE.md` —— `/weaponedit` 的详细指令教程。
 
-### 配置优先级
+### 4. 高度可配置的数据驱动设计
 
-1. 数据包配置优先于模组自带的文件配置
-2. 多个数据包中的配置会合并，后加载的数据包会覆盖先前数据包中的相同配置
+- 生物等级加成、标签概率、职业成长等参数，均可通过数据包与配置文件调整；
+- 服务器服主可以在 **不改动模组 Jar** 的前提下，深度定制玩法难度与成长节奏。
 
-## 创建示例数据包
+详细的数据包结构与字段说明，统一整理在：
 
-1. 在Minecraft主目录下的`datapacks`文件夹中创建一个新文件夹，例如`professioncustom_config`
+- `CONFIG_DATAPACK.md`
 
-2. 在该文件夹中创建`pack.mcmeta`文件：
+---
 
-```json
-{
-  "pack": {
-    "pack_format": 10,
-    "description": "自定义 ProfessionCustom 配置"
-  }
-}
-```
+## 二、安装与环境要求
 
-3. 创建目录结构：`professioncustom_config/data/professioncustom/professioncustom/`
+- Minecraft 版本：**1.20.1**
+- Forge 版本：适配 1.20.1 的 Forge（请使用与你打包时一致或兼容的版本）。
 
-4. 在该目录中创建JSON配置文件，例如`my_config.json`
+### 安装步骤
 
-5. 将数据包放入世界的`datapacks`文件夹中，或在服务器的`world/datapacks`文件夹中
+1. 安装对应版本的 Forge 客户端或服务器。
+2. 将本模组的 `ProfessionCustom-x.y.z.jar` 放入 `mods` 文件夹。
+3. 启动游戏 / 服务器，确认在模组列表中能看到 ProfessionCustom。
+4. 如需使用自定义数据包，将数据包放入世界存档或服务器对应世界的 `datapacks` 文件夹，并使用 `/reload` 或重启服务器。
 
-6. 使用`/reload`命令重新加载数据包
+---
 
-## 内置示例
+## 三、基础上手指南
 
-模组自带了两个示例配置文件，位于：
-- `example_config.json`：基本示例
-- `detailed_config.json`：更详细的配置示例
+### 1. 职业相关
 
-您可以参考这些文件来创建自己的配置。
+- 在游戏中，玩家可以拥有一个职业，并通过获取职业经验提升等级。 
+- 服主可使用以下指令进行测试和调整（更多细节见 `MOD_COMMANDS_GUIDE.md`）：
+  - `/profession list`：查看当前所有可用职业；
+  - `/profession info <职业ID>`：查看指定职业的详细配置；
+  - `/professiontest set <职业ID>`：为自己设置职业；
+  - `/professiontest addxp <数值>`：为自己增加职业经验；
+  - `/professiontest info`：查看自己的职业等级与经验。
 
-## 日志输出
+实际服务器玩法中，推荐通过你自定义的获取方式（例如任务、GUI、物品等）让玩家获得和成长职业，上面这些指令更偏向于 **调试工具**。
 
-配置加载过程会在日志中记录以下信息：
-- 从数据包加载的维度加成数量
-- 从数据包加载的生物加成数量
-- 详细的调试信息（如果启用了调试日志级别）
+### 2. 生物标签与战斗体验
 
-## 注意事项
+- 非玩家生物在生成时会随机获得 1–2 个标签，例如：
+  - `寒冷`：减速与冰冻效果；
+  - `复活`：死亡时有概率满血复活；
+  - `无双`：大幅提升生命、防御与攻击；
+  - `绝境`：残血后进入最终形态，叠加多种强力标签。
+- 标签具体效果、等级强度与出现概率的玩法设计详见：
+  - `MOD_TUTORIAL_TAGS.md`
+  - 标签概率配置详见：`CONFIG_DATAPACK.md`
 
-- 所有配置文件必须是有效的JSON格式
-- 配置中的资源位置必须使用正确的命名空间和路径（如 `minecraft:zombie`）
-- 配置参数必须是有效的数值
-- 建议先在测试环境中测试您的配置文件，确保它们按预期工作
+### 3. 武器与护甲成长
+
+- 武器/护甲可通过战斗获取经验升级，并拥有随机属性词条：
+  - 例如攻击力加成、暴击率、吸血、定伤、反伤、闪避等；
+  - 护甲还可以提供限伤、减伤、反伤、恢复、免疫等特殊机制。
+- 在测试与服主调试阶段，可使用 `/weaponedit` 指令系列快速编辑当前手中装备：
+  - `setlevel` / `setexp` / `addexp` 用于调整等级与经验；
+  - `setquality` 用于改变装备品质；
+  - `setattrcount` / `addattr` / `setattr` / `delattr` 用于控制与修改词条。
+
+具体指令语法和所有词条效果，请配合以下文档使用：
+
+- `MOD_TUTORIAL_TAGS.md`
+- `MOD_COMMANDS_GUIDE.md`
+
+---
+
+## 四、配置与数据包（简要说明）
+
+ProfessionCustom 的大部分数值与规则都可以通过数据包或配置文件调整，例如：
+
+- 生物等级与属性加成；
+- 生物标签的出现概率与强度参数；
+- 职业配置、职业树与成长曲线；
+- 武器 / 护甲词条池、成长曲线与品质规则等。
+
+**本 README 只做总体说明**。关于数据包目录结构、JSON 字段含义和配置示例，请统一查看：
+
+- `CONFIG_DATAPACK.md`
+
+若你只是一般玩家或服主，只需按照其中的示例复制修改即可；若要深入定制，请认真阅读该文档中的字段解释与注意事项。
+
+---
+
+## 五、项目内重要文档索引
+
+- `CONFIG_DATAPACK.md`：数据包配置详解
+- `MOD_TUTORIAL_TAGS.md`：生物标签 / 武器词条 / 装备词条完整教学文档
+- `MOD_COMMANDS_GUIDE.md`：模组指令使用教程
+
+建议：
+
+- 第一次使用本模组时先阅读本 README；
+- 想设计玩法和数值时重点阅读 `MOD_TUTORIAL_TAGS.md` 与 `CONFIG_DATAPACK.md`；
+- 需要调试或运营服务器时随时查阅 `MOD_COMMANDS_GUIDE.md`。
