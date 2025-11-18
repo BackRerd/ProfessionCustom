@@ -1,0 +1,14 @@
+{
+  "name": "irons_wordguard",
+  "displayName": "铁剑卫",
+  "isNormal": true,
+  "upperProfession": "",
+  "professionLevel": 1,
+  "maxLevel": 35,
+  "maxExp": 420,
+  "multiplier": 0.1,
+  "health": 22,
+  "armor": 0.2,
+  "damage": 1,
+  "damageSpeed": 1
+}

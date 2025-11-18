@@ -1,0 +1,20 @@
+{
+  "tag_probabilities": {
+    "professioncustom:tag_cold": 0.3,
+    "professioncustom:tag_resurrect": 0.25,
+    "professioncustom:tag_brutal": 0.35,
+    "professioncustom:tag_explosive": 0.2,
+    "professioncustom:tag_greedy": 0.25,
+    "professioncustom:tag_vampire": 0.3,
+    "professioncustom:tag_lightburst": 0.25,
+    "professioncustom:tag_frenzy": 0.3,
+    "professioncustom:tag_swift": 0.35,
+    "professioncustom:tag_unmatched": 0.15,
+    "professioncustom:tag_soul": 0.2,
+    "professioncustom:tag_teleport": 0.25,
+    "professioncustom:tag_celestial": 0.2,
+    "professioncustom:tag_leader": 0.25,
+    "professioncustom:tag_desperate": 0.1
+  }
+}
+

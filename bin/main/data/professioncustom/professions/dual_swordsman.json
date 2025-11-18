@@ -1,0 +1,14 @@
+{
+  "name": "dual_swordsman",
+  "displayName": "双剑士",
+  "isNormal": true,
+  "upperProfession": "",
+  "professionLevel": 1,
+  "maxLevel": 33,
+  "maxExp": 325,
+  "multiplier": 0.2,
+  "health": 20,
+  "armor": 0.4,
+  "damage": 1.1,
+  "damageSpeed": 1
+}

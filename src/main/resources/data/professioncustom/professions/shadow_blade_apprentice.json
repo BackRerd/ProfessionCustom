@@ -1,0 +1,14 @@
+{
+  "name": "shadow_blade_apprentice",
+  "displayName": "影刃徒",
+  "isNormal": true,
+  "upperProfession": "",
+  "professionLevel": 1,
+  "maxLevel": 30,
+  "maxExp": 120,
+  "multiplier": 0.25,
+  "health": 18,
+  "armor": 0.2,
+  "damage": 1.4,
+  "damageSpeed": 1
+}

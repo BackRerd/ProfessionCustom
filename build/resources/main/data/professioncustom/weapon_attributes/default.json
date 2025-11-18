@@ -1,0 +1,51 @@
+{
+  "qualities": {
+    "common": {
+      "attribute_refresh_chance": 0.05,
+      "max_attributes": 2,
+      "base_value_multiplier": 1.0
+    },
+    "uncommon": {
+      "attribute_refresh_chance": 0.08,
+      "max_attributes": 3,
+      "base_value_multiplier": 1.0
+    },
+    "rare": {
+      "attribute_refresh_chance": 0.12,
+      "max_attributes": 4,
+      "base_value_multiplier": 1.0
+    },
+    "epic": {
+      "attribute_refresh_chance": 0.18,
+      "max_attributes": 6,
+      "base_value_multiplier": 1.0
+    },
+    "legendary": {
+      "attribute_refresh_chance": 0.25,
+      "max_attributes": 7,
+      "base_value_multiplier": 1.0
+    },
+    "mythic": {
+      "attribute_refresh_chance": 0.35,
+      "max_attributes": 8,
+      "base_value_multiplier": 1.0
+    }
+  },
+  "attributes": {
+    "attack_damage": { "base": 3.0, "refresh_weight": 1.0 },
+    "critical_rate": { "base": 5.0, "refresh_weight": 1.0 },
+    "critical_damage": { "base": 0.5, "refresh_weight": 1.0 },
+    "fire_damage": {
+      "base": 3.0,
+      "random_factor_min": 0.8,
+      "random_factor_max": 1.2,
+      "refresh_weight": 1.0
+    },
+    "ice_damage": { "base": 8.0, "refresh_weight": 1.0 },
+    "soul_damage": { "base": 5.0, "refresh_weight": 1.0 },
+    "damage_per_second": { "base": 1.0, "refresh_weight": 1.0 },
+    "lifesteal_rate": { "base": 5.0, "refresh_weight": 1.0 },
+    "lifesteal_multiplier": { "base": 0.5, "refresh_weight": 1.0 },
+    "lightburst": { "base": 1.0, "refresh_weight": 1.0 }
+  }
+}

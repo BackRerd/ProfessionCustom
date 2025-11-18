@@ -1,0 +1,14 @@
+{
+  "name": "heavy_swordmaster",
+  "displayName": "重剑师",
+  "isNormal": true,
+  "upperProfession": "",
+  "professionLevel": 1,
+  "maxLevel": 34,
+  "maxExp": 510,
+  "multiplier": 0.15,
+  "health": 24,
+  "armor": 1.2,
+  "damage": 0.8,
+  "damageSpeed": 1
+}

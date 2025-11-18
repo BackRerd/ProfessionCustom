@@ -1,0 +1,50 @@
+{
+  "qualities": {
+    "common": {
+      "attribute_refresh_chance": 0.05,
+      "max_attributes": 2,
+      "base_value_multiplier": 1.0
+    },
+    "uncommon": {
+      "attribute_refresh_chance": 0.08,
+      "max_attributes": 3,
+      "base_value_multiplier": 1.0
+    },
+    "rare": {
+      "attribute_refresh_chance": 0.12,
+      "max_attributes": 4,
+      "base_value_multiplier": 1.0
+    },
+    "epic": {
+      "attribute_refresh_chance": 0.18,
+      "max_attributes": 6,
+      "base_value_multiplier": 1.0
+    },
+    "legendary": {
+      "attribute_refresh_chance": 0.25,
+      "max_attributes": 7,
+      "base_value_multiplier": 1.0
+    },
+    "mythic": {
+      "attribute_refresh_chance": 0.35,
+      "max_attributes": 8,
+      "base_value_multiplier": 1.0
+    }
+  },
+  "attributes": {
+    "heavy_armor": { "base": 2.0, "refresh_weight": 1.0 },
+    "damage_limit": { "base": 40.0, "reverse_scale": true, "refresh_weight": 1.0 },
+    "thorns": { "base": 5.0, "refresh_weight": 1.0 },
+    "fixed_damage": { "base": 20.0, "reverse_scale": true, "refresh_weight": 1.0 },
+    "slow": { "base": 5.0, "refresh_weight": 1.0 },
+    "stun": { "base": 3.0, "refresh_weight": 1.0 },
+    "regen": { "base": 0.5, "refresh_weight": 1.0 },
+    "explosive": { "base": 3.0, "refresh_weight": 1.0 },
+    "speed": { "base": 0.02, "refresh_weight": 1.0 },
+    "repair": { "base": 1.0, "refresh_weight": 1.0 },
+    "dodge": { "base": 3.0, "refresh_weight": 1.0 },
+    "shock": { "base": 3.0, "refresh_weight": 1.0 },
+    "soul_immune": { "base": 1.0, "refresh_weight": 1.0 },
+    "berserk": { "base": 1.0, "refresh_weight": 1.0 }
+  }
+}

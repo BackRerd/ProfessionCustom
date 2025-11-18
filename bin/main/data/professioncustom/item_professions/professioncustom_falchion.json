@@ -1,0 +1,10 @@
+{
+  "itemId": "professioncustom:falchion",
+  "professions": [
+    "warrior",
+    "berserker"
+  ],
+  "descriptionPrefix": "职业限制: ",
+  "showInLore": true,
+  "loreColor": "aqua"
+}

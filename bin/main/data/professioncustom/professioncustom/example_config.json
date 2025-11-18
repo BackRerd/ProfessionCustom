@@ -1,0 +1,28 @@
+{
+  "dimension_bonuses": {
+    "minecraft:overworld": 1.0,
+    "minecraft:nether": 1.5,
+    "minecraft:end": 2.0,
+    "minecraft:the_nether": 1.5
+  },
+  "mob_bonuses": {
+    "minecraft:zombie": {
+      "health_multiplier": 1.5,
+      "armor_multiplier": 1.0,
+      "armor_toughness_multiplier": 1.0,
+      "attack_damage_multiplier": 1.2
+    },
+    "minecraft:skeleton": {
+      "health_multiplier": 1.2,
+      "armor_multiplier": 1.0,
+      "armor_toughness_multiplier": 1.0,
+      "attack_damage_multiplier": 1.5
+    },
+    "minecraft:creeper": {
+      "health_multiplier": 1.0,
+      "armor_multiplier": 1.0,
+      "armor_toughness_multiplier": 1.0,
+      "attack_damage_multiplier": 2.0
+    }
+  }
+}

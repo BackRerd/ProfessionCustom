@@ -1,0 +1,79 @@
+
+[general]
+	#是否启用职业系统
+	enableProfessionSystem = true
+	#是否启用职业限制（不同职业使用不同武器/装备）
+	enableProfessionRestriction = true
+	#是否启用职业等级系统
+	enableClassLeveling = true
+
+[attribute_limits]
+	#最大生命值限制
+	#Range: 20.0 ~ 1000.0
+	maxHealth = 200.0
+	#最大护甲值限制
+	#Range: 0.0 ~ 100.0
+	maxArmor = 30.0
+	#最大攻击力限制
+	#Range: 1.0 ~ 200.0
+	maxDamage = 50.0
+	#最大攻击速度限制
+	#Range: 1.0 ~ 10.0
+	maxDamageSpeed = 3.8
+
+[attribute_formulas]
+	#生命值计算公式系数（等级 * 职业生命值 * 系数）
+	#Range: 0.01 ~ 1.0
+	healthCoefficient = 0.2
+	#护甲值计算公式系数（等级 * 职业护甲 * 系数）
+	#Range: 0.01 ~ 1.0
+	armorCoefficient = 0.2
+	#攻击力计算公式系数（等级 * 职业攻击力 * 系数）
+	#Range: 0.01 ~ 1.0
+	damageCoefficient = 0.2
+	#攻击速度计算公式系数（等级 * 职业攻击速度 * 系数）
+	#Range: 0.01 ~ 0.5
+	damageSpeedCoefficient = 0.05
+
+[experience]
+	#击杀怪物获得的基础经验值
+	#Range: 0 ~ 1000
+	baseExpForKill = 10
+	#每升一级所需经验的倍率
+	#Range: 1.0 ~ 5.0
+	expMultiplierPerLevel = 1.5
+
+[mob_leveling]
+	#是否启用生物等级系统
+	enableMobLeveling = true
+	#每级所需的基础距离（方块）
+	#Range: 10.0 ~ 1000.0
+	baseLevelDistance = 100.0
+	#距离等级系数，影响等级增长速度
+	#Range: 0.01 ~ 1.0
+	distanceLevelMultiplier = 0.1
+	#是否显示生物等级名称标签（作为前缀添加到生物名称中）
+	showLevelNameTag = false
+	#是否显示额外的等级标签（在生物头顶额外渲染）
+	showExtraLevelTag = true
+	#每级额外增加的基础生命值百分比
+	#Range: 0.0 ~ 2.0
+	healthBonusPerLevel = 0.1
+	#每级额外增加的护甲值
+	#Range: 0.0 ~ 10.0
+	armorBonusPerLevel = 0.5
+	#每级额外增加的护甲韧性
+	#Range: 0.0 ~ 5.0
+	armorToughnessBonusPerLevel = 0.1
+	#每级额外增加的基础攻击力百分比
+	#Range: 0.0 ~ 2.0
+	attackDamageBonusPerLevel = 0.05
+	excludedMobs = []
+
+[profession_change]
+	#是否允许玩家切换职业
+	allowProfessionChange = true
+	#切换职业的代价（如经验值或金币）
+	#Range: 0 ~ 10000
+	professionChangeCost = 100
+

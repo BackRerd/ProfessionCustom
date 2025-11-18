@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Specification-Title: professioncustom
+Specification-Vendor: 
+Specification-Version: 1
+Implementation-Title: professioncustom
+Implementation-Version: 1.0-SNAPSHOT
+Implementation-Vendor: 
+Implementation-Timestamp: 2025-11-12T08:42:44+0800
+MixinConfigs: professioncustom.mixins.json
+

@@ -1,0 +1,10 @@
+{
+  "itemId": "minecraft:bow",
+  "professions": [
+    "archer",
+    "ranger"
+  ],
+  "descriptionPrefix": "职业限制: ",
+  "showInLore": true,
+  "loreColor": "green"
+}

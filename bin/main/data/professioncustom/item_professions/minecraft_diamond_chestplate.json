@@ -1,0 +1,10 @@
+{
+  "itemId": "minecraft:diamond_chestplate",
+  "professions": [
+    "warrior",
+    "berserker"
+  ],
+  "descriptionPrefix": "职业限制: ",
+  "showInLore": true,
+  "loreColor": "aqua"
+}

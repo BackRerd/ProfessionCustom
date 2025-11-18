@@ -1,0 +1,14 @@
+{
+  "name": "berserker",
+  "displayName": "狂战士",
+  "isNormal": false,
+  "upperProfession": "warrior",
+  "professionLevel": 2,
+  "maxLevel": 15,
+  "maxExp": 200,
+  "multiplier": 3,
+  "health": 30,
+  "armor": 3,
+  "damage": 6,
+  "damageSpeed": 1
+}

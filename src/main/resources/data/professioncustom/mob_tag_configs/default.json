@@ -1,0 +1,97 @@
+{
+  "tags": {
+    "professioncustom:tag_explosive": {
+      "base_power": 2.0,
+      "power_per_level": 0.5,
+      "random_extra_base": 1.0,
+      "random_extra_per_level": 0.1,
+      "fire_base": 0.2,
+      "fire_per_level": 0.1,
+      "particle_base": 15,
+      "particle_per_level": 5
+    },
+    "professioncustom:tag_resurrect": {
+      "chance_base": 0.2,
+      "chance_per_level": 0.1,
+      "health_percent_base": 0.4,
+      "health_percent_per_level": 0.05,
+      "regen_duration_base": 60,
+      "regen_duration_per_level": 20,
+      "regen_amplifier_break_level": 3,
+      "resistance_duration_base": 40,
+      "resistance_duration_per_level": 15,
+      "resistance_amplifier_break_level": 4,
+      "particle_base": 20,
+      "particle_per_level": 5
+    },
+    "professioncustom:tag_brutal": {
+      "damage_bonus_base": 0.2,
+      "damage_bonus_per_level": 0.1,
+      "attack_particle_base": 3,
+      "attack_particle_per_level": 2
+    },
+    "professioncustom:tag_greedy": {
+      "self_hp_loss_base": 0.05,
+      "self_hp_loss_per_level": 0.025,
+      "damage_multiplier": 2.0
+    },
+    "professioncustom:tag_vampire": {
+      "heal_percent_base": 0.1,
+      "heal_percent_per_level": 0.1
+    },
+    "professioncustom:tag_lightburst": {
+      "blind_duration_base": 60,
+      "blind_duration_per_level": 20,
+      "dark_duration_base": 80,
+      "dark_duration_per_level": 20,
+      "particle_count": 15
+    },
+    "professioncustom:tag_frenzy": {
+      "range_base": 2.0,
+      "range_per_level": 0.5
+    },
+    "professioncustom:tag_cold": {
+      "attack_freeze_chance_base": 0.4,
+      "attack_freeze_chance_per_level": 0.1,
+      "attack_slow_duration_base": 40,
+      "attack_slow_duration_per_level": 15,
+      "attack_slow_amplifier_break_level": 3,
+      "attack_particle_base": 8,
+      "attack_particle_per_level": 2,
+      "aura_range_base": 3.0,
+      "aura_range_per_level": 0.5,
+      "aura_chance_base": 0.15,
+      "aura_chance_per_level": 0.05,
+      "aura_duration_base": 30,
+      "aura_duration_per_level": 10
+    },
+    "professioncustom:tag_soul": {
+      "extra_damage_percent_per_level": 0.0
+    },
+    "professioncustom:tag_teleport": {
+      "teleport_health_threshold": 0.1
+    },
+    "professioncustom:tag_celestial": {
+      "trigger_chance_base": 0.2,
+      "trigger_chance_per_level": 0.1,
+      "damage_percent_base": 0.1,
+      "damage_percent_per_level": 0.05,
+      "explosion_power_base": 1.0,
+      "explosion_power_per_level": 0.5
+    },
+    "professioncustom:tag_leader": {
+      "max_summon_per_level": 1
+    },
+    "professioncustom:tag_desperate": {
+      "trigger_health_percent": 0.05
+    },
+    "professioncustom:tag_swift": {
+      "speed_multiplier_base": 0.2,
+      "speed_multiplier_per_level": 0.2
+    },
+    "professioncustom:tag_unmatched": {
+      "attack_damage_multiplier_base": 0.2,
+      "attack_damage_multiplier_per_level": 0.2
+    }
+  }
+}

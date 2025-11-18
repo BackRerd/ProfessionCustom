@@ -1,0 +1,10 @@
+{
+  "itemId": "minecraft:diamond_hoe",
+  "professions": [
+    "mage",
+    "wizard"
+  ],
+  "descriptionPrefix": "职业限制: ",
+  "showInLore": true,
+  "loreColor": "purple"
+}
