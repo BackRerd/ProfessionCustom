@@ -8,7 +8,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -67,8 +66,7 @@ public class CareerSelectButtonMessage {
 		}
 	}
 
-	@SubscribeEvent
-	public static void registerMessage(FMLCommonSetupEvent event) {
+	public static void register() {
 		Professioncustom.addNetworkMessage(CareerSelectButtonMessage.class, CareerSelectButtonMessage::buffer, CareerSelectButtonMessage::new, CareerSelectButtonMessage::handler);
 	}
 }

@@ -43,14 +43,19 @@ public class MobLevelManager {
             // 为生物添加等级标签
             addLevelTag(entity, level);
             
-            // 直接应用等级属性，避免使用单独的事件监听器
-            try {
-                // 使用反射调用applyLevelAttributes方法
-                Class<?> calculatorClass = Class.forName("site.backrer.professioncustom.level.MobAttributeCalculator");
-                java.lang.reflect.Method applyMethod = calculatorClass.getMethod("applyLevelAttributes", LivingEntity.class);
-                applyMethod.invoke(null, entity);
-            } catch (Exception e) {
-                Professioncustom.LOGGER.error("Failed to apply level attributes: {}", e.getMessage());
+            // 延迟应用属性，确保实体完全加载
+            if (entity.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                serverLevel.getServer().execute(() -> {
+                    try {
+                        site.backrer.professioncustom.level.MobAttributeCalculator.applyLevelAttributes((LivingEntity) entity);
+                        if (MobConfig.enableDebugLogging) {
+                            Professioncustom.LOGGER.debug("Applied level attributes for entity: {}, level: {}", 
+                                entity.getType().getDescription().getString(), level);
+                        }
+                    } catch (Exception e) {
+                        Professioncustom.LOGGER.error("Failed to apply level attributes: {}", e.getMessage());
+                    }
+                });
             }
         }
     }
@@ -181,5 +186,14 @@ public class MobLevelManager {
      */
     public static void removeEntityLevel(UUID entityId) {
         entityLevels.remove(entityId);
+    }
+    
+    /**
+     * 更新实体等级（用于网络同步）
+     * @param entityId 实体UUID
+     * @param level 新等级
+     */
+    public static void updateEntityLevel(UUID entityId, int level) {
+        entityLevels.put(entityId, level);
     }
 }

@@ -1,4 +1,8 @@
-{
-  "itemId": "minecraft:stick",
-  "type": "weapon"
-}
+[
+  {
+    "itemId": "minecraft:stick"
+  },
+  {
+    "itemId": "minecraft:Diamond"
+  }
+]

@@ -18,7 +18,7 @@ import java.util.UUID;
 /**
  * 生物右键点击处理器，负责在玩家右键点击生物时显示NBT标签信息
  */
-@Mod.EventBusSubscriber(modid = Professioncustom.MODID)
+//@Mod.EventBusSubscriber(modid = Professioncustom.MODID)
 public class MobRightClickHandler {
 
     /**

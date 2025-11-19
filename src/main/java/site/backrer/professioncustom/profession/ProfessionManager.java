@@ -35,7 +35,7 @@ import static site.backrer.professioncustom.Professioncustom.MODID;
 /**
  * 职业管理器，负责从JSON配置文件加载和管理所有职业
  */
-@Mod.EventBusSubscriber(modid = MODID)
+@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ProfessionManager extends SimpleJsonResourceReloadListener {
     
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();

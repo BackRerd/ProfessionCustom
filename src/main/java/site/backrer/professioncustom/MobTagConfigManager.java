@@ -20,7 +20,7 @@ import static site.backrer.professioncustom.Professioncustom.MODID;
 /**
  * 生物标签配置管理器，从 data/professioncustom/mob_tag_configs/*.json 读取各标签的强度参数
  */
-@Mod.EventBusSubscriber(modid = MODID)
+@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class MobTagConfigManager extends SimpleJsonResourceReloadListener {
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
@@ -80,5 +80,23 @@ public class MobTagConfigManager extends SimpleJsonResourceReloadListener {
             }
         }
         return defaultValue;
+    }
+    
+    /**
+     * 加载标签配置
+     * @param tagId 标签ID
+     * @param config 配置JSON对象
+     */
+    public static void loadTagConfig(String tagId, JsonObject config) {
+        TAG_CONFIGS.put(tagId, config);
+        Professioncustom.LOGGER.debug("Loaded tag config for: {}", tagId);
+    }
+    
+    /**
+     * 获取所有已加载的标签配置
+     * @return 标签配置映射
+     */
+    public static Map<String, JsonObject> getAllConfigs() {
+        return new HashMap<>(TAG_CONFIGS);
     }
 }

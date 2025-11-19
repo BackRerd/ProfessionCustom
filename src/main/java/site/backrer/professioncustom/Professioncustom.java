@@ -68,7 +68,9 @@ public class Professioncustom {
         MinecraftForge.EVENT_BUS.register(MobLevelAttributeListener.class);
 //        MinecraftForge.EVENT_BUS.register(MobRightClickHandler.class);
         MinecraftForge.EVENT_BUS.register(MobTagEventHandler.class);
-        MinecraftForge.EVENT_BUS.register(new EntityNameRenderer());
+        
+        // Register data pack loader
+        MinecraftForge.EVENT_BUS.register(site.backrer.professioncustom.data.DataPackLoader.class);
         
         // Register profession restriction event handlers
         MinecraftForge.EVENT_BUS.register(EquipmentEventHandler.class);
@@ -84,6 +86,13 @@ public class Professioncustom {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         LOGGER.info("ProfessionCustom mod initialized");
+
+        // 在一个固定位置注册所有网络消息，确保客户端和服务器的消息ID顺序一致
+        event.enqueueWork(() -> {
+            site.backrer.professioncustom.profession.network.CareerSelectButtonMessage.register();
+            site.backrer.professioncustom.profession.network.CareerInfoGuiButtonMessage.register();
+            site.backrer.professioncustom.profession.network.ModVariables.register();
+        });
     }
 
     @SubscribeEvent
@@ -135,6 +144,9 @@ public class Professioncustom {
                     site.backrer.professioncustom.profession.gui.ModMenus.CAREER_INFO_GUI.get(),
                     site.backrer.professioncustom.profession.gui.CareerInfoGuiScreen::new
                 );
+
+                // Register client-side entity name renderer overlay
+                MinecraftForge.EVENT_BUS.register(new EntityNameRenderer());
             });
         }
 

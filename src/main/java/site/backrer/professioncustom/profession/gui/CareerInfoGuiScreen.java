@@ -79,21 +79,48 @@ public class CareerInfoGuiScreen extends AbstractContainerScreen<CareerInfoGuiMe
 
 	@Override
 	protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-		int select = (int) entity.getMainHandItem().getOrCreateTag().getDouble(CareerGuiProcedure.SELECT_INT);
-		List<Profession> professions = ProfessionManager.getNormalProfessions();
-		if (select < 0 || select >= professions.size()) {
-			return;
+		try {
+			int select = (int) entity.getMainHandItem().getOrCreateTag().getDouble(CareerGuiProcedure.SELECT_INT);
+			List<Profession> professions = ProfessionManager.getNormalProfessions();
+			if (select < 0 || select >= professions.size()) {
+				// 显示默认信息
+				guiGraphics.drawString(this.font, "No Profession Selected", 10, 37, 0x404040, false);
+				return;
+			}
+			
+			Profession profession = professions.get(select);
+			
+			// 使用可见的颜色渲染文字
+			int titleColor = 0x404040;  // 深灰色
+			int textColor = 0x404040;   // 深灰色
+			
+			// 标题
+			guiGraphics.drawString(this.font, CareerGuiProcedure.CareerSelectTitleProcedure(), 69, -6, titleColor, false);
+			
+			// 职业信息
+			guiGraphics.drawString(this.font, 
+				Component.translatable("gui.professioncustom.career_info_gui.label_health")
+					.append(": " + profession.getHealth()), 10, 37, textColor, false);
+			guiGraphics.drawString(this.font, 
+				Component.translatable("gui.professioncustom.career_info_gui.label_armar")
+					.append(": " + profession.getArmor()), 10, 46, textColor, false);
+			guiGraphics.drawString(this.font, 
+				Component.translatable("gui.professioncustom.career_info_gui.label_damage1")
+					.append(": " + profession.getDamage()), 10, 56, textColor, false);
+			guiGraphics.drawString(this.font, 
+				Component.translatable("gui.professioncustom.career_info_gui.label_beilv013")
+					.append(": " + profession.getMultiplier()), 10, 66, textColor, false);
+			guiGraphics.drawString(this.font, 
+				Component.translatable("gui.professioncustom.career_info_gui.label_exp")
+					.append(": " + profession.getMaxExp()), 10, 76, textColor, false);
+			guiGraphics.drawString(this.font, 
+				Component.translatable("gui.professioncustom.career_info_gui.label_level35")
+					.append(": " + profession.getMaxLevel()), 11, 85, textColor, false);
+		} catch (Exception e) {
+			// 如果出现异常，显示错误信息
+			guiGraphics.drawString(this.font, "Error loading profession data", 10, 37, 0xFF0000, false);
+			Professioncustom.LOGGER.error("Error rendering career info GUI labels: {}", e.getMessage());
 		}
-		Profession profession = professions.get(select);
-		guiGraphics.drawString(this.font,
-
-				CareerGuiProcedure.CareerSelectTitleProcedure(), 69, -6, -1, false);
-		guiGraphics.drawString(this.font, Component.translatable("gui.professioncustom.career_info_gui.label_health").append(String.valueOf(profession.getHealth())), 10, 37, -1, false);
-		guiGraphics.drawString(this.font, Component.translatable("gui.professioncustom.career_info_gui.label_armar").append(String.valueOf(profession.getArmor())), 10, 46, -1, false);
-		guiGraphics.drawString(this.font, Component.translatable("gui.professioncustom.career_info_gui.label_damage1").append(String.valueOf(profession.getDamage())), 10, 56, -1, false);
-		guiGraphics.drawString(this.font, Component.translatable("gui.professioncustom.career_info_gui.label_beilv013").append(String.valueOf(profession.getMultiplier())), 10, 66, -1, false);
-		guiGraphics.drawString(this.font, Component.translatable("gui.professioncustom.career_info_gui.label_exp").append(String.valueOf(profession.getMaxExp())), 10, 76, -1, false);
-		guiGraphics.drawString(this.font, Component.translatable("gui.professioncustom.career_info_gui.label_level35").append(String.valueOf(profession.getMaxLevel())), 11, 85, -1, false);
 	}
 
 	@Override

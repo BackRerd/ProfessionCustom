@@ -10,7 +10,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -77,8 +76,7 @@ public class CareerInfoGuiButtonMessage {
 		}
 	}
 
-	@SubscribeEvent
-	public static void registerMessage(FMLCommonSetupEvent event) {
+	public static void register() {
 		Professioncustom.addNetworkMessage(CareerInfoGuiButtonMessage.class, CareerInfoGuiButtonMessage::buffer, CareerInfoGuiButtonMessage::new, CareerInfoGuiButtonMessage::handler);
 	}
 }

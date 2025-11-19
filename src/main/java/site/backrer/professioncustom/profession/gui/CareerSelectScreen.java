@@ -51,7 +51,17 @@ public class CareerSelectScreen extends AbstractContainerScreen<CareerSelectMenu
 		guiGraphics.blit(ResourceLocation.fromNamespaceAndPath("professioncustom", "textures/screens/8.png"), this.leftPos + -12, this.topPos + 6, 0, 0, 198, 142, 198, 142);
 
 		if (CareerGuiProcedure.MainSelectInfoProcedure(entity)) {
-            guiGraphics.blit(CareerGuiProcedure.getProfessionIcon(entity), this.leftPos + 77, this.topPos + 63, 0, 0, 28, 28, 28, 28);
+            try {
+                ResourceLocation iconLocation = CareerGuiProcedure.getProfessionIcon(entity);
+                if (iconLocation != null) {
+                    RenderSystem.setShaderTexture(0, iconLocation);
+                    guiGraphics.blit(iconLocation, this.leftPos + 77, this.topPos + 63, 0, 0, 28, 28, 28, 28);
+                }
+            } catch (Exception e) {
+                // 如果图标加载失败，使用默认图标
+                ResourceLocation defaultIcon = ResourceLocation.fromNamespaceAndPath("professioncustom", "textures/screens/2.png");
+                guiGraphics.blit(defaultIcon, this.leftPos + 77, this.topPos + 63, 0, 0, 28, 28, 28, 28);
+            }
         }
 		RenderSystem.disableBlend();
 	}

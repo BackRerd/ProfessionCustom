@@ -89,20 +89,34 @@ public class MobTagManager {
             // 检查是否已经有标签，避免重复分配
             UUID uuid = entity.getUUID();
             if (!entityTagLevels.containsKey(uuid)) {
-                // 随机分配1-2个标签，并分配等级
-                Map<String, Integer> assignedTags = assignRandomTagsWithLevels(entity);
-                entityTagLevels.put(uuid, assignedTags);
-                
-                // 为生物添加标签和等级标签
-                for (Map.Entry<String, Integer> entry : assignedTags.entrySet()) {
-                    String tagId = entry.getKey();
-                    int level = entry.getValue();
-                    entity.addTag(tagId);
-                    entity.addTag(tagId + "_level_" + level);
+                // 延迟分配标签，确保实体完全加载
+                if (entity.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                    serverLevel.getServer().execute(() -> {
+                        try {
+                            // 随机分配1-2个标签，并分配等级
+                            Map<String, Integer> assignedTags = assignRandomTagsWithLevels(entity);
+                            entityTagLevels.put(uuid, assignedTags);
+                            
+                            // 为生物添加标签和等级标签
+                            for (Map.Entry<String, Integer> entry : assignedTags.entrySet()) {
+                                String tagId = entry.getKey();
+                                int level = entry.getValue();
+                                entity.addTag(tagId);
+                                entity.addTag(tagId + "_level_" + level);
+                            }
+                            
+                            // 添加通用标签标识
+                            entity.addTag("professioncustom:has_tag");
+                            
+                            if (MobConfig.enableDebugLogging) {
+                                Professioncustom.LOGGER.debug("Assigned tags to entity: {}, tags: {}", 
+                                    entity.getType().getDescription().getString(), assignedTags);
+                            }
+                        } catch (Exception e) {
+                            Professioncustom.LOGGER.error("Failed to assign tags to entity: {}", e.getMessage());
+                        }
+                    });
                 }
-                
-                // 添加通用标签标识
-                entity.addTag("professioncustom:has_tag");
             }
         }
     }

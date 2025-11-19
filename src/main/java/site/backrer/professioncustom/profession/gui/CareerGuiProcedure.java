@@ -108,17 +108,23 @@ public class CareerGuiProcedure {
             String professionName = profession.getName().toLowerCase();
             ResourceLocation iconLocation = ResourceLocation.fromNamespaceAndPath("professioncustom", "textures/screens/professions/" + professionName + ".png");
             
-            // 检查资源是否存在的逻辑
+            // 在客户端环境下检查资源是否存在
             try {
-                // 尝试获取资源，如果不存在会抛出异常
-                net.minecraft.server.packs.resources.ResourceManager resourceManager = 
-                    net.minecraft.client.Minecraft.getInstance().getResourceManager();
-                if (resourceManager.getResource(iconLocation).isPresent()) {
-                    return iconLocation;
+                // 检查是否在客户端环境
+                if (net.minecraftforge.fml.loading.FMLEnvironment.dist.isClient()) {
+                    // 尝试获取资源，如果不存在会抛出异常
+                    net.minecraft.server.packs.resources.ResourceManager resourceManager = 
+                        net.minecraft.client.Minecraft.getInstance().getResourceManager();
+                    if (resourceManager.getResource(iconLocation).isPresent()) {
+                        return iconLocation;
+                    }
                 }
             } catch (Exception e) {
-                // 资源不存在，使用默认图标
+                // 资源不存在或在服务器端，使用默认图标
             }
+            
+            // 服务器端或资源不存在时，直接返回基于职业名称的资源位置
+            return iconLocation;
         }
         return ResourceLocation.fromNamespaceAndPath("professioncustom", "textures/screens/2.png");
     }

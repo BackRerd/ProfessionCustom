@@ -21,6 +21,8 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.PacketDistributor;
 
@@ -30,8 +32,8 @@ import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModVariables {
-    @SubscribeEvent
-    public static void init(FMLCommonSetupEvent event) {
+    // 在主mod类中以固定顺序调用此方法注册网络消息，避免客户端和服务器消息ID顺序不一致
+    public static void register() {
         Professioncustom.addNetworkMessage(PlayerVariablesSyncMessage.class, PlayerVariablesSyncMessage::buffer, PlayerVariablesSyncMessage::new, PlayerVariablesSyncMessage::handler);
     }
 
@@ -151,7 +153,9 @@ public class ModVariables {
         }
 
         public void readNBT(Tag tag) {
-            CompoundTag nbt = (CompoundTag) tag;
+            if (!(tag instanceof CompoundTag nbt)) {
+                return;
+            }
             skill = nbt.getDouble("skill");
             // 读取职业相关数据
             professionName = nbt.getString("professionName");
@@ -317,21 +321,26 @@ public class ModVariables {
         public static void handler(PlayerVariablesSyncMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
             NetworkEvent.Context context = contextSupplier.get();
             context.enqueueWork(() -> {
-                if (!context.getDirection().getReceptionSide().isServer()) {
-                    @Nullable
-                    Player player = Minecraft.getInstance().player;
-                    if (player != null) {
-                        PlayerVariables variables = player.getCapability(ModVariables.PLAYER_VARIABLES_CAPABILITY, null).orElse(new PlayerVariables());
-                        variables.skill = message.data.skill;
-                        // 同步职业相关数据
-                        variables.professionName = message.data.professionName;
-                        variables.professionLevel = message.data.professionLevel;
-                        variables.currentExperience = message.data.currentExperience;
-                        variables.maxExperience = message.data.maxExperience;
-                    }
+                if (context.getDirection().getReceptionSide().isClient()) {
+                    handleClient(message);
                 }
             });
             context.setPacketHandled(true);
+        }
+
+        @OnlyIn(Dist.CLIENT)
+        private static void handleClient(PlayerVariablesSyncMessage message) {
+            @Nullable
+            Player player = Minecraft.getInstance().player;
+            if (player != null) {
+                PlayerVariables variables = player.getCapability(ModVariables.PLAYER_VARIABLES_CAPABILITY, null).orElse(new PlayerVariables());
+                variables.skill = message.data.skill;
+                // 同步职业相关数据
+                variables.professionName = message.data.professionName;
+                variables.professionLevel = message.data.professionLevel;
+                variables.currentExperience = message.data.currentExperience;
+                variables.maxExperience = message.data.maxExperience;
+            }
         }
     }
 }
